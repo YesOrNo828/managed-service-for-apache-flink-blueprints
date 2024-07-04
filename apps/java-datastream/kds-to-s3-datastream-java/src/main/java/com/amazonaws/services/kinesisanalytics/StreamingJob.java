@@ -173,6 +173,8 @@ public class StreamingJob {
 		FileSink<Stock> fSink = getFileSink(env, appProperties);
 		DataStreamSink<Stock> sink = stockStream.sinkTo(fSink).name("S3 File Sink");
 
+		stockStream.print("This is stock");
+
 		if(!isLocal(env) && appProperties.containsKey(SINK_PARALLELISM_KEY)) {
 			int sinkParallelism = Integer.parseInt(appProperties.get(SINK_PARALLELISM_KEY).toString());
 
